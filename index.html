@@ -6,7 +6,287 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="./style.css">
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@100;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Arimo:wght@400;500;600;700&display=swap');
+
+@keyframes gradientGrow {
+    0% {
+        background: linear-gradient(0deg, rgba(0, 0, 0, 255) 2.5%, rgba(255, 255, 255, 0) 30%);
+    }
+    100% {
+        background: linear-gradient(0deg, rgba(0, 0, 0, 255) 2.5%, rgba(255, 255, 255, 0) 50%);
+    }
+}
+
+@keyframes backgroundGradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --card-width: 12vw;
+    --card-height: 37.5vh;
+    --star-checked: yellow;
+    --star-unchecked: black;
+}
+
+#anime-body-container {
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    /* background: linear-gradient(31deg, blue, green); */
+    /* background: linear-gradient(31deg, rgb(255, 81, 0), rgb(122, 25, 122)); */
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background-repeat: no-repeat;
+    background-size: 1000% 1000%;
+    background-position: 0% 0%;
+    animation: infinite 15s backgroundGradient;
+}
+
+#anime-body-container > #title {
+    font-family: "Barlow", sans-serif;
+    font-weight: 500;
+    font-size: 60px;
+    color: white;
+    filter: drop-shadow(0px 5px 2.5px black);
+}
+
+#anime-body-container > #anime-list {
+    width: 70vw;
+    /* height: calc(var(--card-height) + 50px); */
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+
+    list-style: none;
+
+    /* background-color: red; */
+}
+
+#anime-body-container > #anime-list > .anime {
+    width: var(--card-width);
+    height: var(--card-height);
+
+    /* border: solid 1px black; */
+    border-radius: 10px;
+
+    /* background-color: black; */
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: relative;
+
+    overflow: hidden;
+    
+    /* box-shadow: 0px 0px 5px 1px rgb(135, 135, 135); */
+
+    margin: 2.5px;
+}
+
+#anime-body-container > #anime-list > .anime > .anime--link {
+    width: var(--card-width);
+    height: calc(var(--card-height));
+
+    display: flex;
+    justify-content: center;
+
+    z-index: 10;
+
+    position: absolute;
+}
+
+#anime-body-container > #anime-list > .anime > .anime--link > .anime--title {
+    width: calc(var(--card-width) - 10px);
+    height: calc(var(--card-height) - 40px);
+    
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    
+    position: absolute;
+    
+    color: white;
+    
+    z-index: 3;
+    
+    font-size: 17.5px;
+    font-family: 'Barlow', sans-serif;
+    font-weight: 500;
+    
+    padding: 0px 0px 0px 0px;
+    margin: 0px 0px 0px 0px;
+
+    text-align: center;
+
+    filter: drop-shadow(0px 2px 0px black);
+}
+
+#anime-body-container > #anime-list > .anime > .anime--episodes {
+    width: calc(0.5 * var(--card-width));
+    height: calc(var(--card-height) - 60px);
+    
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    
+    position: absolute;
+    
+    color: white;
+    
+    z-index: 3;
+    
+    font-size: 10px;
+    font-family: 'Noto Sans', sans-serif;
+    font-weight: 100;
+
+    padding: 0px 0px 0px 0px;
+    margin: 0px 0px 0px 0px;
+}
+
+#anime-body-container > #anime-list > .anime > .anime--link > .anime--title, #anime-body-container > #anime-list > .anime > .anime--episodes {
+    filter: drop-shadow(0px 2px 2px black)
+}
+
+.anime--backdrop {
+    width: var(--card-width);
+    height: var(--card-height);
+
+    position: absolute;
+
+    z-index: 2;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 255) 2.5%, rgba(255, 255, 255, 0) 30%);
+    border-radius: 0px;
+
+    transition: 0.3s;
+}
+
+.anime:hover > .anime--backdrop {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.anime--cover {
+    width: var(--card-width);
+    height: var(--card-height);
+    position: absolute;
+    border-radius: 10px;
+    transition: 0.3s;
+}
+
+.anime:hover > .anime--cover {
+    width: calc(var(--card-width) + 22.5px);
+    height: calc(var(--card-height) + 35px);
+}
+
+.anime--rating {
+    width: var(--card-width);
+    height: calc(var(--card-height) - 10px);
+
+    position: absolute;
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+
+    z-index: 3;
+
+    unicode-bidi: bidi-override;
+    direction: rtl;
+}
+
+.star {
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    width: 20px;
+    font-size: 22.5px;
+    color: white;
+}
+
+.star.checked:before {
+    content: "\2605";
+    left: 0;
+    position: absolute;
+    color: gold;
+}
+
+#roll {
+    width: calc(var(--card-width) * 5 + calc(5px * 5));
+    height: 40px;
+
+    margin-top: 10px;
+
+    color: white;
+    border: 2px solid white;
+    border-radius: 5px;
+    background-color: inherit;
+
+    padding: 5px;
+
+    font-weight: 700;
+    font-family: 'Barlow', sans-serif;
+    font-size: 15px;
+
+    transition: 0.3s;
+    cursor: pointer;
+
+}
+
+#roll:hover {
+    background-color: rgb(48, 134, 48);
+    border: 2px solid rgb(48, 134, 48);
+    box-shadow: 0px 0px 10px 2.5px rgb(48, 134, 48);
+}
+
+#manga {
+    width: 90px;
+    height: 50px;
+    
+    margin-top: calc(100vh - 60px);
+    margin-left: calc(100vw - 100px);
+
+    border-radius: 5px;
+    color: white;
+    border: 2px solid white;
+    background-color: inherit;
+    
+    z-index: 10;
+    
+    position: absolute;
+    
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+#manga:hover {
+    background-color:rgb(48, 134, 48);
+    border: 2px solid rgb(48, 134, 48);
+    box-shadow: 0px 0px 10px 2.5px rgb(48, 134, 48);
+}
+    </style>
 </head>
 <body>
     
